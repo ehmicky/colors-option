@@ -50,7 +50,7 @@
     "test": "test"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^0.31.85",
+    "@ehmicky/dev-tasks": "^0.31.86",
     "test-each": "^2.0.1"
   },
   "engines": {
