@@ -1,8 +1,49 @@
-/* eslint-disable import/unambiguous */
-// eslint-disable-next-line no-empty-function
-const colorsOption = function () {}
+import Chalk from 'chalk'
+
+import { getOpts } from './options.js'
+
+// Retrieve `chalk` instance.
+// Allows forcing `colors` with `true` or `false` (default: guessed).
+// Use `stdout.getColorDepth()` instead of chalk's default behavior (relying
+// on `supports-color`) because it:
+//  - Handles the `NO_COLOR` and `NODE_DISABLE_COLORS` environment variables
+//  - Does not try to guess the `level` from CLI flags
+//  - Has a simpler priority order between CLI flags, options and environment
+//    variables
+//  - Is built-in Node.js behavior
+const colorsOption = function (colors, opts) {
+  const { colors: colorsA, stream, chalkOpts } = getOpts(colors, opts)
+
+  const level = getLevel(colorsA, stream)
+  const chalk = new Chalk.Instance({ ...chalkOpts, level })
+  return chalk
+}
+
+const getLevel = function (colors, stream) {
+  if (colors === false) {
+    return 0
+  }
+
+  const terminalLevel = getTerminalLevel(stream)
+
+  if (colors === undefined) {
+    return terminalLevel
+  }
+
+  return Math.max(terminalLevel, 1)
+}
+
+const getTerminalLevel = function (stream) {
+  if (!stream.isTTY) {
+    return 0
+  }
+
+  return DEPTH_TO_LEVEL[stream.getColorDepth()]
+}
+
+// Maps chalk levels to color depth
+const DEPTH_TO_LEVEL = { 1: 0, 4: 1, 8: 2, 24: 3 }
 
 // We do not use `export default` because Babel transpiles it in a way that
 // requires CommonJS users to `require(...).default` instead of `require(...)`.
 module.exports = colorsOption
-/* eslint-enable import/unambiguous */

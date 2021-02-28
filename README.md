@@ -25,7 +25,7 @@ npm install colors-option
 
 ## colorsOption(colors, options?)
 
-`colors`: `boolean`\
+`colors`: `boolean | undefined`\
 `options`: `object?`\
 _Return value_: `Chalk`
 
