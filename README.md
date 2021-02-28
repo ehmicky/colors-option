@@ -10,7 +10,7 @@ Let your users enable/disable colors.
 This is a thin wrapper around the popular colors library
 [`chalk`](https://github.com/chalk/chalk) that adds support for:
 
-- A `colors` boolean option.
+- A [`colors` boolean option](#colors).
 - The [`NO_COLOR`](https://no-color.org/) and
   [`NODE_DISABLE_COLORS`](https://nodejs.org/api/cli.html#cli_node_disable_colors_1)
   environment variables.
@@ -37,9 +37,7 @@ npm install colors-option
 ## colorsOption(options?)
 
 `options`: `object`\
-_Return value_: `Chalk`
-
-This returns an instance of [`chalk`](https://github.com/chalk/chalk#api).
+_Return value_: [`Chalk` instance](https://github.com/chalk/chalk#api)
 
 ### options
 
@@ -49,34 +47,32 @@ _Type_: `boolean`\
 _Default_: `undefined`
 
 Whether colors should be enabled/disabled, regardless of terminal support.
-
-Colors support is automatically detected by default, so this is only meant for
-users to override the default detection.
+Colors support is automatically detected by default, so this is only meant to
+override that default behavior.
 
 The recommended approach is to:
 
-- Add a programmatic `colors` boolean option (and optionally a `--colors`
-  boolean CLI flag)
-- Not assign any default value to it
+- Add a programmatic `colors` boolean option and/or CLI flag
+- Keep its default value `undefined`
 - Forward it to `colors-option`
 
 This relies on Node.js built-in colors detection
 [`getColorDepth()`](https://nodejs.org/api/tty.html#tty_writestream_getcolordepth_env)
 instead of [`chalk/supports-color`](https://github.com/chalk/supports-color)
-which enables the following features:
+which:
 
-- Support for the [`NO_COLOR`](https://no-color.org/) and
+- Supports the [`NO_COLOR`](https://no-color.org/) and
   [`NODE_DISABLE_COLORS`](https://nodejs.org/api/cli.html#cli_node_disable_colors_1)
   environment variables.
-- Does not try to guess colors detection based on the presence of a
+- Does not guess colors detection based on the presence of a
   [`--colors` CLI flag](https://github.com/chalk/supports-color#info). This
-  gives you finer control and flexibility over how you prefer to expose this as
-  a CLI flag.
+  gives you finer control and flexibility over how to expose this as a CLI flag.
 
 #### stream
 
-_Type_: `Stream`\
-_Default_: `process.stdout`
+_Type_:
+[`Stream`](https://nodejs.org/api/stream.html#stream_class_stream_writable)\
+_Default_: [`process.stdout`](https://nodejs.org/api/process.html#process_process_stdout)
 
 Stream used to detect colors support. This should be the file or terminal where
 the colors are output.
