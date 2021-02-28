@@ -7,20 +7,20 @@
 
 Let your users enable/disable colors.
 
-This is a thin wrapper around the popular colors library
-[`chalk`](https://github.com/chalk/chalk) that adds support for:
+This is a thin wrapper around the popular
+[`chalk`](https://github.com/chalk/chalk) colors library that adds support for:
 
-- A [`colors` boolean option](#colors).
+- A [`colors` boolean option](#colors)
 - The [`NO_COLOR`](https://no-color.org/) and
   [`NODE_DISABLE_COLORS`](https://nodejs.org/api/cli.html#cli_node_disable_colors_1)
-  environment variables.
+  environment variables
 
 # Example
 
 ```js
 const colorsOption = require('colors-option')
 
-const exampleLibrary = function ({ colors, ...opts }) {
+const exampleLibrary = function ({ colors, ...otherLibraryOptions }) {
   const chalk = colorsOption({ colors })
   console.log(chalk.red('example'))
 }
@@ -47,8 +47,8 @@ _Type_: `boolean`\
 _Default_: `undefined`
 
 Whether colors should be enabled/disabled, regardless of terminal support.
-Colors support is automatically detected by default, so this is only meant to
-override that default behavior.
+Colors support is automatically detected, so this is only meant to override that
+default behavior.
 
 The recommended approach is to:
 
