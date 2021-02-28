@@ -14,7 +14,7 @@
       "pre-push": "gulp -LL check --full"
     }
   },
-  "description": "Allow your users to enable/disable colors",
+  "description": "Let your users enable/disable colors",
   "keywords": [
     "color",
     "colors",
