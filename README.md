@@ -7,12 +7,23 @@
 
 Let your users enable/disable colors.
 
-TODO
+This is a thin wrapper around the popular colors library
+[`chalk`](https://github.com/chalk/chalk) that adds support for:
+
+- A `colors` boolean option.
+- The [`NO_COLOR`](https://no-color.org/) and
+  [`NODE_DISABLE_COLORS`](https://nodejs.org/api/cli.html#cli_node_disable_colors_1)
+  environment variables.
 
 # Example
 
 ```js
 const colorsOption = require('colors-option')
+
+const exampleLibrary = function ({ colors, ...opts }) {
+  const chalk = colorsOption({ colors })
+  console.log(chalk.red('example'))
+}
 ```
 
 # Install
@@ -23,11 +34,52 @@ npm install colors-option
 
 # API
 
-## colorsOption(colors, options?)
+## colorsOption(options?)
 
-`colors`: `boolean | undefined`\
-`options`: `object?`\
+`options`: `object`\
 _Return value_: `Chalk`
+
+This returns an instance of [`chalk`](https://github.com/chalk/chalk#api).
+
+### options
+
+#### colors
+
+_Type_: `boolean`\
+_Default_: `undefined`
+
+Whether colors should be enabled/disabled, regardless of terminal support.
+
+Colors support is automatically detected by default, so this is only meant for
+users to override the default detection.
+
+The recommended approach is to:
+
+- Add a programmatic `colors` boolean option (and optionally a `--colors`
+  boolean CLI flag)
+- Not assign any default value to it
+- Forward it to `colors-option`
+
+This relies on Node.js built-in colors detection
+[`getColorDepth()`](https://nodejs.org/api/tty.html#tty_writestream_getcolordepth_env)
+instead of [`chalk/supports-color`](https://github.com/chalk/supports-color)
+which enables the following features:
+
+- Support for the [`NO_COLOR`](https://no-color.org/) and
+  [`NODE_DISABLE_COLORS`](https://nodejs.org/api/cli.html#cli_node_disable_colors_1)
+  environment variables.
+- Does not try to guess colors detection based on the presence of a
+  [`--colors` CLI flag](https://github.com/chalk/supports-color#info). This
+  gives you finer control and flexibility over how you prefer to expose this as
+  a CLI flag.
+
+#### stream
+
+_Type_: `Stream`\
+_Default_: `process.stdout`
+
+Stream used to detect colors support. This should be the file or terminal where
+the colors are output.
 
 # Support
 

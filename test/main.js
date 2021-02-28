@@ -7,9 +7,9 @@ import { each } from 'test-each'
 
 import colorsOption from '../src/main.js'
 
-each([[true, true], [true, { stream: {} }], [1]], ({ title }, args) => {
+each([true, { stream: {} }, { colors: 1 }], ({ title }, options) => {
   test(`Validate options | ${title}`, (t) => {
-    t.throws(colorsOption.bind(undefined, ...args))
+    t.throws(colorsOption.bind(undefined, options))
   })
 })
 
@@ -52,7 +52,7 @@ each(
       env.FORCE_COLOR = String(terminalLevel)
 
       try {
-        const chalk = colorsOption(colorsOpt, { stream })
+        const chalk = colorsOption({ colors: colorsOpt, stream })
 
         // eslint-disable-next-line max-depth
         if (platform === 'win32') {

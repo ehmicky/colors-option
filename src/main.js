@@ -3,7 +3,7 @@ import Chalk from 'chalk'
 import { getOpts } from './options.js'
 
 // Retrieve `chalk` instance.
-// Allows forcing `colors` with `true` or `false` (default: guessed).
+// Allows forcing `opts.colors` with `true` or `false` (default: guessed).
 // Use `stdout.getColorDepth()` instead of chalk's default behavior (relying
 // on `supports-color`) because it:
 //  - Handles the `NO_COLOR` and `NODE_DISABLE_COLORS` environment variables
@@ -11,10 +11,10 @@ import { getOpts } from './options.js'
 //  - Has a simpler priority order between CLI flags, options and environment
 //    variables
 //  - Is built-in Node.js behavior
-const colorsOption = function (colors, opts) {
-  const { colors: colorsA, stream, chalkOpts } = getOpts(colors, opts)
+const colorsOption = function (opts) {
+  const { colors, stream, chalkOpts } = getOpts(opts)
 
-  const level = getLevel(colorsA, stream)
+  const level = getLevel(colors, stream)
   const chalk = new Chalk.Instance({ ...chalkOpts, level })
   return chalk
 }

@@ -6,27 +6,20 @@ import isPlainObj from 'is-plain-obj'
 import { validate } from 'jest-validate'
 
 // Normalize options and assign default values
-export const getOpts = function (colors, opts = {}) {
-  const optsA = validateOpts(colors, opts)
-  const optsB = filterObj(optsA, isDefined)
+export const getOpts = function (opts = {}) {
+  validateOpts(opts)
+  const optsA = filterObj(opts, isDefined)
   const { colors: colorsA, stream, ...chalkOpts } = {
     ...DEFAULT_OPTS,
-    ...optsB,
+    ...optsA,
   }
   return { colors: colorsA, stream, chalkOpts }
 }
 
-const validateOpts = function (colors, opts) {
+const validateOpts = function (opts) {
   validateBasicOpts(opts)
-
-  const optsA = { ...opts, colors }
-  validate(optsA, {
-    exampleConfig: EXAMPLE_OPTS,
-    recursiveDenylist: ['stream'],
-  })
-  validateStream(optsA)
-
-  return optsA
+  validate(opts, { exampleConfig: EXAMPLE_OPTS, recursiveDenylist: ['stream'] })
+  validateStream(opts)
 }
 
 const validateBasicOpts = function (opts) {
