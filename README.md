@@ -52,13 +52,14 @@ default behavior.
 
 The recommended approach is to:
 
-- Add a programmatic `colors` boolean option and/or CLI flag
+- Add a `colors` boolean programmatic option and/or CLI flag
 - Keep its default value `undefined`
 - Forward it to `colors-option`
 
-This relies on Node.js built-in colors detection
+Instead of using
+[`chalk/supports-color`](https://github.com/chalk/supports-color), this relies
+on Node.js built-in colors detection
 [`getColorDepth()`](https://nodejs.org/api/tty.html#tty_writestream_getcolordepth_env)
-instead of [`chalk/supports-color`](https://github.com/chalk/supports-color)
 which:
 
 - Supports the [`NO_COLOR`](https://no-color.org/) and
