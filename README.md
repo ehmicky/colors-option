@@ -5,7 +5,7 @@
 [![Twitter](https://img.shields.io/badge/%E2%80%8B-twitter-4cc61e.svg?logo=twitter)](https://twitter.com/intent/follow?screen_name=ehmicky)
 [![Medium](https://img.shields.io/badge/%E2%80%8B-medium-4cc61e.svg?logo=medium)](https://medium.com/@ehmicky)
 
-Let your users enable/disable colors.
+Let users toggle colors.
 
 This is a thin wrapper around the popular
 [`chalk`](https://github.com/chalk/chalk) colors library that adds support for:
@@ -66,7 +66,7 @@ which:
   environment variables.
 - Does not guess colors detection based on the presence of a
   [`--colors` CLI flag](https://github.com/chalk/supports-color#info). This
-  gives you finer control and flexibility over how to expose this as a CLI flag.
+  gives finer control and flexibility over how to expose this as a CLI flag.
 
 Please note that `chalk` has a similar
 [`level` option](https://github.com/chalk/chalk#chalklevel). However, that
