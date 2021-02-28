@@ -68,6 +68,11 @@ which:
   [`--colors` CLI flag](https://github.com/chalk/supports-color#info). This
   gives you finer control and flexibility over how to expose this as a CLI flag.
 
+Please note that `chalk` has a similar
+[`level` option](https://github.com/chalk/chalk#chalklevel). However, that
+option is an integer from `0` to `3` which makes it hard to toggle colors while
+still keeping 256 colors or Truecolor.
+
 #### stream
 
 _Type_:
