@@ -1,4 +1,4 @@
-import { env } from 'process'
+import { env, stdout, platform } from 'process'
 import { Writable } from 'stream'
 import { WriteStream } from 'tty'
 
@@ -13,8 +13,14 @@ each([[true, true], [true, { stream: {} }], [1]], ({ title }, args) => {
   })
 })
 
+// Ava seems to modify `stdout`, which makes `new WriteStream()` fail on
+// Windows.
 const getTtyStream = function () {
-  return new WriteStream(1)
+  if (platform === 'win32') {
+    return stdout
+  }
+
+  return new WriteStream(stdout.fd)
 }
 
 const getNoTtyStream = function () {
@@ -47,6 +53,13 @@ each(
 
       try {
         const chalk = colorsOption(colorsOpt, { stream })
+
+        // eslint-disable-next-line max-depth
+        if (platform === 'win32') {
+          t.pass()
+          return
+        }
+
         t.is(chalk.level, outputLevel)
       } finally {
         // eslint-disable-next-line fp/no-delete
