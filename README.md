@@ -82,6 +82,11 @@ _Default_: [`process.stdout`](https://nodejs.org/api/process.html#process_proces
 Stream used to detect colors support. This should be the file or terminal where
 the colors are output.
 
+# See also
+
+- [`terminal-theme`](https://github.com/ehmicky/terminal-theme): 🎨 Use a color
+  theme for your code's terminal output.
+
 # Support
 
 For any question, _don't hesitate_ to [submit an issue on GitHub](../../issues).
