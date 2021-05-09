@@ -9,7 +9,11 @@ import { validate } from 'jest-validate'
 export const getOpts = function (opts = {}) {
   validateOpts(opts)
   const optsA = filterObj(opts, isDefined)
-  const { colors: colorsA, stream, ...chalkOpts } = {
+  const {
+    colors: colorsA,
+    stream,
+    ...chalkOpts
+  } = {
     ...DEFAULT_OPTS,
     ...optsA,
   }
