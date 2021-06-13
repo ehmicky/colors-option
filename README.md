@@ -16,8 +16,10 @@ This is a thin wrapper around the popular
 
 # Example
 
+<!-- eslint-disable node/no-missing-import -->
+
 ```js
-const colorsOption = require('colors-option')
+import colorsOption from 'colors-option'
 
 const exampleLibrary = function ({ colors, ...otherLibraryOptions }) {
   const chalk = colorsOption({ colors })
