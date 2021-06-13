@@ -11,7 +11,8 @@ import { getOpts } from './options.js'
 //  - Has a simpler priority order between CLI flags, options and environment
 //    variables
 //  - Is built-in Node.js behavior
-const colorsOption = function (opts) {
+// eslint-disable-next-line import/no-default-export
+export default function colorsOption(opts) {
   const { colors, stream, chalkOpts } = getOpts(opts)
 
   const level = getLevel(colors, stream)
@@ -43,7 +44,3 @@ const getTerminalLevel = function (stream) {
 
 // Maps chalk levels to color depth
 const DEPTH_TO_LEVEL = { 1: 0, 4: 1, 8: 2, 24: 3 }
-
-// We do not use `export default` because Babel transpiles it in a way that
-// requires CommonJS users to `require(...).default` instead of `require(...)`.
-module.exports = colorsOption
