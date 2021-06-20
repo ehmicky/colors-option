@@ -56,6 +56,6 @@
     "chalk": "^4.1.0",
     "filter-obj": "^2.0.1",
     "is-plain-obj": "^4.0.0",
-    "jest-validate": "^26.6.2"
+    "jest-validate": "^27.0.2"
   }
 }
