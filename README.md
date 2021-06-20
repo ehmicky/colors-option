@@ -16,8 +16,6 @@ This is a thin wrapper around the popular
 
 # Example
 
-<!-- eslint-disable node/no-missing-import -->
-
 ```js
 import colorsOption from 'colors-option'
 
