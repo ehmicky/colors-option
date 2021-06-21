@@ -11,7 +11,6 @@ import { getOpts } from './options.js'
 //  - Has a simpler priority order between CLI flags, options and environment
 //    variables
 //  - Is built-in Node.js behavior
-// eslint-disable-next-line import/no-default-export
 export default function colorsOption(opts) {
   const { colors, stream, chalkOpts } = getOpts(opts)
 
