@@ -3,7 +3,6 @@ import { Writable } from 'stream'
 import { WriteStream } from 'tty'
 
 import test from 'ava'
-// eslint-disable-next-line import/no-unresolved, node/no-missing-import
 import colorsOption from 'colors-option'
 import { each } from 'test-each'
 
