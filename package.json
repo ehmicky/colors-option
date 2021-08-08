@@ -54,7 +54,7 @@
     "node": ">=12.20.0"
   },
   "dependencies": {
-    "chalk": "^4.1.0",
+    "chalk": "^4.1.2",
     "filter-obj": "^2.0.1",
     "is-plain-obj": "^4.0.0",
     "jest-validate": "^27.0.6"
