@@ -1,4 +1,4 @@
-import Chalk from 'chalk'
+import { Chalk } from 'chalk'
 
 import { getOpts } from './options.js'
 
@@ -15,7 +15,7 @@ export default function colorsOption(opts) {
   const { colors, stream, chalkOpts } = getOpts(opts)
 
   const level = getLevel(colors, stream)
-  const chalk = new Chalk.Instance({ ...chalkOpts, level })
+  const chalk = new Chalk({ ...chalkOpts, level })
   return chalk
 }
 
