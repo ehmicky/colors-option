@@ -1,3 +1,12 @@
+# 3.0.0
+
+## Breaking changes
+
+- Upgrade to [`chalk@v5`](https://github.com/chalk/chalk/releases/tag/v5.0.0).
+- This means the following methods are not available anymore: `keyword()`,
+  `hsl()`, `hsv()`, `hwb()` and `ansi()`.
+- This also means advanced templating is also not available anymore.
+
 # 2.0.1
 
 ## Bug fixes
