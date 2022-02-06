@@ -12,13 +12,7 @@ each([true, { stream: {} }, { colors: 1 }], ({ title }, options) => {
   })
 })
 
-// Ava seems to modify `stdout`, which makes `new WriteStream()` fail on
-// Windows.
 const getTtyStream = function () {
-  if (platform === 'win32') {
-    return stdout
-  }
-
   return new WriteStream(stdout.fd)
 }
 
