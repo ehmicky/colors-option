@@ -1,14 +1,14 @@
 import { stdout } from 'process'
 import { Stream } from 'stream'
 
-import filterObj from 'filter-obj'
+import { excludeKeys } from 'filter-obj'
 import isPlainObj from 'is-plain-obj'
 import { validate } from 'jest-validate'
 
 // Normalize options and assign default values
 export const getOpts = function (opts = {}) {
   validateOpts(opts)
-  const optsA = filterObj(opts, isDefined)
+  const optsA = excludeKeys(opts, isUndefined)
   const {
     colors: colorsA,
     stream,
@@ -38,8 +38,8 @@ const validateStream = function ({ stream }) {
   }
 }
 
-const isDefined = function (key, value) {
-  return value !== undefined
+const isUndefined = function (key, value) {
+  return value === undefined
 }
 
 const DEFAULT_OPTS = {
