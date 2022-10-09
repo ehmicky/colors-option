@@ -88,6 +88,8 @@ the colors are output.
 
 # See also
 
+- [`chalk-string`](https://github.com/ehmicky/chalk-string): Chalk with style
+  strings.
 - [`terminal-theme`](https://github.com/ehmicky/terminal-theme): 🎨 Use a color
   theme for your code's terminal output.
 
