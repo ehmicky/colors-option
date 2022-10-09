@@ -1,29 +1,15 @@
 import { stdout } from 'process'
 import { Stream } from 'stream'
 
-import { excludeKeys } from 'filter-obj'
 import isPlainObj from 'is-plain-obj'
-import { validate } from 'jest-validate'
 
 // Normalize options and assign default values
 export const getOpts = function (opts = {}) {
-  validateOpts(opts)
-  const optsA = excludeKeys(opts, isUndefined)
-  const {
-    colors: colorsA,
-    stream,
-    ...chalkOpts
-  } = {
-    ...DEFAULT_OPTS,
-    ...optsA,
-  }
-  return { colors: colorsA, stream, chalkOpts }
-}
-
-const validateOpts = function (opts) {
   validateBasicOpts(opts)
-  validate(opts, { exampleConfig: EXAMPLE_OPTS, recursiveDenylist: ['stream'] })
-  validateStream(opts)
+  const { colors, stream = stdout, ...chalkOpts } = opts
+  validateColors(colors)
+  validateStream(stream)
+  return { colors, stream, chalkOpts }
 }
 
 const validateBasicOpts = function (opts) {
@@ -32,21 +18,14 @@ const validateBasicOpts = function (opts) {
   }
 }
 
-const validateStream = function ({ stream }) {
-  if (stream !== undefined && !(stream instanceof Stream)) {
-    throw new TypeError(`"stream" option must be a stream: ${stream}`)
+const validateColors = function (colors) {
+  if (colors !== undefined && typeof colors !== 'boolean') {
+    throw new TypeError(`"colors" option must be a boolean: ${colors}`)
   }
 }
 
-const isUndefined = function (key, value) {
-  return value === undefined
-}
-
-const DEFAULT_OPTS = {
-  stream: stdout,
-}
-
-const EXAMPLE_OPTS = {
-  ...DEFAULT_OPTS,
-  colors: true,
+const validateStream = function (stream) {
+  if (!(stream instanceof Stream)) {
+    throw new TypeError(`"stream" option must be a stream: ${stream}`)
+  }
 }

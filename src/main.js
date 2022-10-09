@@ -13,7 +13,6 @@ import { getOpts } from './options.js'
 //  - Is built-in Node.js behavior
 export default function colorsOption(opts) {
   const { colors, stream, chalkOpts } = getOpts(opts)
-
   const level = getLevel(colors, stream)
   const chalk = new Chalk({ ...chalkOpts, level })
   return chalk
@@ -25,20 +24,11 @@ const getLevel = function (colors, stream) {
   }
 
   const terminalLevel = getTerminalLevel(stream)
-
-  if (colors === undefined) {
-    return terminalLevel
-  }
-
-  return Math.max(terminalLevel, 1)
+  return colors === undefined ? terminalLevel : Math.max(terminalLevel, 1)
 }
 
 const getTerminalLevel = function (stream) {
-  if (!stream.isTTY) {
-    return 0
-  }
-
-  return DEPTH_TO_LEVEL[stream.getColorDepth()]
+  return stream.isTTY ? DEPTH_TO_LEVEL[stream.getColorDepth()] : 0
 }
 
 // Maps chalk levels to color depth

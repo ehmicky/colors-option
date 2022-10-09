@@ -47,9 +47,7 @@
   },
   "dependencies": {
     "chalk": "^5.0.1",
-    "filter-obj": "^5.1.0",
-    "is-plain-obj": "^4.1.0",
-    "jest-validate": "^29.0.1"
+    "is-plain-obj": "^4.1.0"
   },
   "devDependencies": {
     "@ehmicky/dev-tasks": "^1.0.94",

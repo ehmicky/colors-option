@@ -6,12 +6,6 @@ import test from 'ava'
 import colorsOption from 'colors-option'
 import { each } from 'test-each'
 
-each([true, { stream: {} }, { colors: 1 }], ({ title }, options) => {
-  test(`Validate options | ${title}`, (t) => {
-    t.throws(colorsOption.bind(undefined, options))
-  })
-})
-
 // Ava seems to modify `stdout`, which makes `new WriteStream()` fail on
 // Windows.
 const getTtyStream = function () {
