@@ -50,7 +50,7 @@
     "is-plain-obj": "^4.1.0"
   },
   "devDependencies": {
-    "@ehmicky/dev-tasks": "^1.0.94",
+    "@ehmicky/dev-tasks": "^1.0.95",
     "@types/node": "^18.0.6",
     "test-each": "^5.4.1"
   },
