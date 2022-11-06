@@ -1,6 +1,6 @@
-import { env, stdout, platform } from 'process'
-import { Writable } from 'stream'
-import { WriteStream } from 'tty'
+import { env, stdout, platform } from 'node:process'
+import { Writable } from 'node:stream'
+import { WriteStream } from 'node:tty'
 
 import test from 'ava'
 import colorsOption from 'colors-option'

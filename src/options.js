@@ -1,5 +1,5 @@
-import { stdout } from 'process'
-import { Stream } from 'stream'
+import { stdout } from 'node:process'
+import { Stream } from 'node:stream'
 
 import isPlainObj from 'is-plain-obj'
 
