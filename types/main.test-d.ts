@@ -1,7 +1,7 @@
 import type { ChalkInstance } from 'chalk'
 import { expectType, expectAssignable, expectError } from 'tsd'
 
-import colorsOption, { Options } from './main.js'
+import colorsOption, { Options } from 'colors-option'
 
 expectType<ChalkInstance>(colorsOption())
 
