@@ -1,7 +1,8 @@
-import type { ChalkInstance } from 'chalk'
-import { expectType, expectAssignable } from 'tsd'
+import { stderr } from 'node:process'
 
-import colorsOption, { Options } from 'colors-option'
+import type { ChalkInstance } from 'chalk'
+import colorsOption, { type Options } from 'colors-option'
+import { expectType, expectAssignable } from 'tsd'
 
 expectType<ChalkInstance>(colorsOption())
 
@@ -17,7 +18,7 @@ colorsOption({ colors: true })
 // @ts-expect-error
 colorsOption({ colors: 1 })
 
-expectAssignable<Options>({ stream: process.stderr })
-colorsOption({ stream: process.stderr })
+expectAssignable<Options>({ stream: stderr })
+colorsOption({ stream: stderr })
 // @ts-expect-error
 colorsOption({ stream: true })
