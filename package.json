@@ -52,7 +52,7 @@
     "test": "test"
   },
   "dependencies": {
-    "chalk": "^5.1.2",
+    "chalk": "^5.2.0",
     "is-plain-obj": "^4.1.0"
   },
   "devDependencies": {
