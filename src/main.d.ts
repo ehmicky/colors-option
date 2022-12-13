@@ -30,7 +30,7 @@ export type Options = Partial<
  *
  * @example
  * ```js
- * const exampleLibrary = function ({ colors, ...otherLibraryOptions }) {
+ * const exampleLibrary = ({ colors, ...otherLibraryOptions }) => {
  *   const chalk = colorsOption({ colors })
  *   console.log(chalk.red('example'))
  * }

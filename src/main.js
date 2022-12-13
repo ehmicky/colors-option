@@ -11,14 +11,16 @@ import { getOpts } from './options.js'
 //  - Has a simpler priority order between CLI flags, options and environment
 //    variables
 //  - Is built-in Node.js behavior
-export default function colorsOption(opts) {
+const colorsOption = (opts) => {
   const { colors, stream, chalkOpts } = getOpts(opts)
   const level = getLevel(colors, stream)
   const chalk = new Chalk({ ...chalkOpts, level })
   return chalk
 }
 
-const getLevel = function (colors, stream) {
+export default colorsOption
+
+const getLevel = (colors, stream) => {
   if (colors === false) {
     return 0
   }
@@ -27,9 +29,8 @@ const getLevel = function (colors, stream) {
   return colors === undefined ? terminalLevel : Math.max(terminalLevel, 1)
 }
 
-const getTerminalLevel = function (stream) {
-  return stream.isTTY ? DEPTH_TO_LEVEL[stream.getColorDepth()] : 0
-}
+const getTerminalLevel = (stream) =>
+  stream.isTTY ? DEPTH_TO_LEVEL[stream.getColorDepth()] : 0
 
 // Maps chalk levels to color depth
 const DEPTH_TO_LEVEL = { 1: 0, 4: 1, 8: 2, 24: 3 }

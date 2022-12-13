@@ -19,7 +19,7 @@ This is a thin wrapper around the popular
 ```js
 import colorsOption from 'colors-option'
 
-const exampleLibrary = function ({ colors, ...otherLibraryOptions }) {
+const exampleLibrary = ({ colors, ...otherLibraryOptions }) => {
   const chalk = colorsOption({ colors })
   console.log(chalk.red('example'))
 }

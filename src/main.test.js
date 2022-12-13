@@ -8,7 +8,7 @@ import { each } from 'test-each'
 
 // Ava seems to modify `stdout`, which makes `new WriteStream()` fail on
 // Windows.
-const getTtyStream = function () {
+const getTtyStream = () => {
   if (platform === 'win32') {
     return stdout
   }
@@ -16,9 +16,7 @@ const getTtyStream = function () {
   return new WriteStream(stdout.fd)
 }
 
-const getNoTtyStream = function () {
-  return new Writable()
-}
+const getNoTtyStream = () => new Writable()
 
 each(
   [
