@@ -42,7 +42,10 @@
   ],
   "license": "MIT",
   "homepage": "https://www.github.com/ehmicky/colors-option",
-  "repository": "ehmicky/colors-option",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ehmicky/colors-option.git"
+  },
   "bugs": {
     "url": "https://github.com/ehmicky/colors-option/issues"
   },
