@@ -40,7 +40,7 @@ const exampleLibrary = ({ colors, ...otherLibraryOptions }) => {
 npm install colors-option
 ```
 
-This package works in Node.js >=16.17.0.
+This package works in Node.js >=18.18.0.
 
 This is an ES module. It must be loaded using
 [an `import` or `import()` statement](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c),
