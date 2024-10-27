@@ -13,7 +13,7 @@ const getTtyStream = () => {
     return stdout
   }
 
-  return new WriteStream(stdout.fd)
+  return new WriteStream(1)
 }
 
 const getNoTtyStream = () => new Writable()
