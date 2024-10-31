@@ -1,4 +1,4 @@
-import { env, stdout, platform } from 'node:process'
+import { env, platform, stdout } from 'node:process'
 import { Writable } from 'node:stream'
 import { WriteStream } from 'node:tty'
 

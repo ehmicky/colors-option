@@ -2,7 +2,7 @@ import { stderr } from 'node:process'
 
 import type { ChalkInstance } from 'chalk'
 import colorsOption, { type Options } from 'colors-option'
-import { expectType, expectAssignable } from 'tsd'
+import { expectAssignable, expectType } from 'tsd'
 
 expectType<ChalkInstance>(colorsOption())
 
