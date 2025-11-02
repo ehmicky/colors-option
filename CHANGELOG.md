@@ -1,3 +1,10 @@
+# 6.1.0
+
+## Features
+
+- Add [`level`](README.md#level) option to override the number of colors to
+  display. For example, to force 256 or 16 millions colors mode.
+
 # 6.0.1
 
 ## Documentation
