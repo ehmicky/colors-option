@@ -22,3 +22,20 @@ expectAssignable<Options>({ stream: stderr })
 colorsOption({ stream: stderr })
 // @ts-expect-error
 colorsOption({ stream: true })
+
+expectAssignable<Options>({ level: undefined })
+colorsOption({ level: undefined })
+expectAssignable<Options>({ level: 1 })
+colorsOption({ level: 1 })
+expectAssignable<Options>({ level: 2 })
+colorsOption({ level: 2 })
+expectAssignable<Options>({ level: 3 })
+colorsOption({ level: 3 })
+// @ts-expect-error
+colorsOption({ level: 0 })
+// @ts-expect-error
+colorsOption({ level: 1.5 })
+// @ts-expect-error
+colorsOption({ level: 4 })
+// @ts-expect-error
+colorsOption({ level: true })

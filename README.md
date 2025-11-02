@@ -53,15 +53,10 @@ _Return value_: [`Chalk` instance](https://github.com/chalk/chalk#api)
 _Type_: `boolean`\
 _Default_: `undefined`
 
-Whether colors should be enabled/disabled, regardless of terminal support.
-Colors support is automatically detected, so this is only meant to override that
-default behavior.
+Whether colors should be displayed or not.
 
-The recommended approach is to:
-
-- Add a `colors` boolean programmatic option and/or CLI flag
-- Keep its default value `undefined`
-- Forward it to `colors-option`
+Since it is automatically detected by the [`stream`](#stream) option, this is
+only meant to override the default behavior.
 
 Instead of using
 [`chalk/supports-color`](https://github.com/chalk/supports-color), this relies
@@ -76,10 +71,20 @@ which:
   [`--colors` CLI flag](https://github.com/chalk/supports-color#info). This
   gives finer control and flexibility over how to expose this as a CLI flag.
 
-Please note that `chalk` has a similar
-[`level` option](https://github.com/chalk/chalk#chalklevel). However, that
-option is an integer from `0` to `3` which makes it hard to toggle colors while
-still keeping 256 colors or Truecolor.
+#### level
+
+_Type_: `1 | 2 | 3`\
+_Default_: `undefined`
+
+[How many colors](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors) to
+display. The value can be:
+
+- `1`: 16 (4 bits)
+- `2`: 256 (8 bits)
+- `3`: 16 millions (24 bits)
+
+Since it is automatically detected by the [`stream`](#stream) option, this is
+only meant to override the default behavior.
 
 #### stream
 
@@ -87,8 +92,10 @@ _Type_:
 [`Stream`](https://nodejs.org/api/stream.html#stream_class_stream_writable)\
 _Default_: [`process.stdout`](https://nodejs.org/api/process.html#process_process_stdout)
 
-Stream used to detect colors support. This should be the file or terminal where
-the colors are output.
+Stream used to detect the default value of the [`colors`](#colors) and
+[`level`](#level) options.
+
+This should be the file or terminal where the colors are output.
 
 # See also
 
