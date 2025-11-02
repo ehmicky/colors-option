@@ -1,3 +1,11 @@
+# 6.1.1
+
+## Bug fixes
+
+- When the [`level`](README.md#level) option is set but not the
+  [`colors`](README.md#colors) option, no colors should be shown if the
+  [`stream`](README.md#stream) does not support them.
+
 # 6.1.0
 
 ## Features
