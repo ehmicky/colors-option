@@ -1,3 +1,11 @@
+# 6.1.2
+
+## Bug fixes
+
+- When the [`stream`](README.md#stream) is not a TTY but colors are forced using
+  the [`colors: true`](README.md#colors) option, colors should be shown and
+  should respect the terminal's default [`level`](README.md#level).
+
 # 6.1.1
 
 ## Bug fixes

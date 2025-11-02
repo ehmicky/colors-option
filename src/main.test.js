@@ -31,10 +31,10 @@ each(
     { colorsOpt: true, stream: false, terminalLevel: 1, outputLevel: 1 },
     { colorsOpt: false, stream: false, terminalLevel: 1, outputLevel: 0 },
     { colorsOpt: undefined, stream: false, terminalLevel: 2, outputLevel: 0 },
-    { colorsOpt: true, stream: false, terminalLevel: 2, outputLevel: 1 },
+    { colorsOpt: true, stream: false, terminalLevel: 2, outputLevel: 2 },
     { colorsOpt: false, stream: false, terminalLevel: 2, outputLevel: 0 },
     { colorsOpt: undefined, stream: false, terminalLevel: 3, outputLevel: 0 },
-    { colorsOpt: true, stream: false, terminalLevel: 3, outputLevel: 1 },
+    { colorsOpt: true, stream: false, terminalLevel: 3, outputLevel: 3 },
     { colorsOpt: false, stream: false, terminalLevel: 3, outputLevel: 0 },
 
     { colorsOpt: undefined, stream: true, terminalLevel: 0, outputLevel: 0 },

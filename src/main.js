@@ -1,3 +1,5 @@
+import { WriteStream } from 'node:tty'
+
 import { Chalk } from 'chalk'
 
 import { getOpts } from './options.js'
@@ -18,9 +20,7 @@ const colorsOption = (opts) => {
   const {
     stream,
     colors = stream.isTTY && stream.getColorDepth() !== 1,
-    level: levelOption = stream.isTTY
-      ? DEPTH_TO_LEVEL[stream.getColorDepth()]
-      : 1,
+    level: levelOption = DEPTH_TO_LEVEL[WriteStream.prototype.getColorDepth()],
     chalkOpts,
   } = getOpts(opts)
   const level = colors ? levelOption : 0
@@ -32,6 +32,5 @@ export default colorsOption
 // The internal Node.js code actually does not use `stream` but `process.env`
 // to determine the color depth:
 // https://github.com/nodejs/node/blob/aac7925801edfc8dd1de051a29aac85332e7d200/lib/internal/tty.js#L123
-// We still need the `stream` to disable colors by default when it is not a TTY.
 // Maps color depth to chalk levels.
 const DEPTH_TO_LEVEL = { 1: 1, 4: 1, 8: 2, 24: 3 }
