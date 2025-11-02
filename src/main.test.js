@@ -8,51 +8,323 @@ import { each } from 'test-each'
 
 // Ava seems to modify `stdout`, which makes `new WriteStream()` fail on
 // Windows.
-const getTtyStream = () => {
-  if (platform === 'win32') {
-    return stdout
+const getStream = (streamOption) => {
+  if (streamOption === undefined) {
+    return
   }
 
-  return new WriteStream(1)
-}
+  if (!streamOption) {
+    return new Writable()
+  }
 
-const getNoTtyStream = () => new Writable()
+  return platform === 'win32' ? stdout : new WriteStream(1)
+}
 
 each(
   [
-    { colorsOpt: undefined, stream: getNoTtyStream(), outputLevel: 0 },
-    { colorsOpt: true, stream: getNoTtyStream(), outputLevel: 1 },
-    { colorsOpt: false, stream: getNoTtyStream(), outputLevel: 0 },
-    { colorsOpt: undefined, terminalLevel: 0, outputLevel: 0 },
-    { colorsOpt: true, terminalLevel: 0, outputLevel: 1 },
-    { colorsOpt: false, terminalLevel: 0, outputLevel: 0 },
-    { colorsOpt: undefined, terminalLevel: 1, outputLevel: 1 },
-    { colorsOpt: true, terminalLevel: 1, outputLevel: 1 },
-    { colorsOpt: false, terminalLevel: 1, outputLevel: 0 },
-    { colorsOpt: undefined, terminalLevel: 2, outputLevel: 2 },
-    { colorsOpt: true, terminalLevel: 2, outputLevel: 2 },
-    { colorsOpt: false, terminalLevel: 2, outputLevel: 0 },
-    { colorsOpt: undefined, terminalLevel: 3, outputLevel: 3 },
-    { colorsOpt: true, terminalLevel: 3, outputLevel: 3 },
-    { colorsOpt: false, terminalLevel: 3, outputLevel: 0 },
-    { colorsOpt: undefined, levelOption: 1, outputLevel: 1 },
-    { colorsOpt: true, levelOption: 1, outputLevel: 1 },
-    { colorsOpt: false, levelOption: 1, outputLevel: 0 },
-    { colorsOpt: undefined, levelOption: 2, outputLevel: 2 },
-    { colorsOpt: true, levelOption: 2, outputLevel: 2 },
-    { colorsOpt: false, levelOption: 2, outputLevel: 0 },
-    { colorsOpt: undefined, levelOption: 3, outputLevel: 3 },
-    { colorsOpt: true, levelOption: 3, outputLevel: 3 },
-    { colorsOpt: false, levelOption: 3, outputLevel: 0 },
-    { colorsOpt: undefined, levelOption: 1, terminalLevel: 3, outputLevel: 1 },
-    { colorsOpt: true, levelOption: 1, terminalLevel: 3, outputLevel: 1 },
-    { colorsOpt: false, levelOption: 1, terminalLevel: 3, outputLevel: 0 },
-    { colorsOpt: undefined, levelOption: 2, terminalLevel: 3, outputLevel: 2 },
-    { colorsOpt: true, levelOption: 2, terminalLevel: 3, outputLevel: 2 },
-    { colorsOpt: false, levelOption: 2, terminalLevel: 3, outputLevel: 0 },
-    { colorsOpt: undefined, levelOption: 3, terminalLevel: 0, outputLevel: 3 },
-    { colorsOpt: true, levelOption: 3, terminalLevel: 0, outputLevel: 3 },
-    { colorsOpt: false, levelOption: 3, terminalLevel: 0, outputLevel: 0 },
+    { colorsOpt: undefined, terminalLevel: 3, outputLevel: 0 },
+
+    { colorsOpt: undefined, stream: false, terminalLevel: 0, outputLevel: 0 },
+    { colorsOpt: true, stream: false, terminalLevel: 0, outputLevel: 1 },
+    { colorsOpt: false, stream: false, terminalLevel: 0, outputLevel: 0 },
+    { colorsOpt: undefined, stream: false, terminalLevel: 1, outputLevel: 0 },
+    { colorsOpt: true, stream: false, terminalLevel: 1, outputLevel: 1 },
+    { colorsOpt: false, stream: false, terminalLevel: 1, outputLevel: 0 },
+    { colorsOpt: undefined, stream: false, terminalLevel: 2, outputLevel: 0 },
+    { colorsOpt: true, stream: false, terminalLevel: 2, outputLevel: 1 },
+    { colorsOpt: false, stream: false, terminalLevel: 2, outputLevel: 0 },
+    { colorsOpt: undefined, stream: false, terminalLevel: 3, outputLevel: 0 },
+    { colorsOpt: true, stream: false, terminalLevel: 3, outputLevel: 1 },
+    { colorsOpt: false, stream: false, terminalLevel: 3, outputLevel: 0 },
+
+    { colorsOpt: undefined, stream: true, terminalLevel: 0, outputLevel: 0 },
+    { colorsOpt: true, stream: true, terminalLevel: 0, outputLevel: 1 },
+    { colorsOpt: false, stream: true, terminalLevel: 0, outputLevel: 0 },
+    { colorsOpt: undefined, stream: true, terminalLevel: 1, outputLevel: 1 },
+    { colorsOpt: true, stream: true, terminalLevel: 1, outputLevel: 1 },
+    { colorsOpt: false, stream: true, terminalLevel: 1, outputLevel: 0 },
+    { colorsOpt: undefined, stream: true, terminalLevel: 2, outputLevel: 2 },
+    { colorsOpt: true, stream: true, terminalLevel: 2, outputLevel: 2 },
+    { colorsOpt: false, stream: true, terminalLevel: 2, outputLevel: 0 },
+    { colorsOpt: undefined, stream: true, terminalLevel: 3, outputLevel: 3 },
+    { colorsOpt: true, stream: true, terminalLevel: 3, outputLevel: 3 },
+    { colorsOpt: false, stream: true, terminalLevel: 3, outputLevel: 0 },
+
+    { colorsOpt: undefined, stream: false, levelOption: 1, outputLevel: 0 },
+    { colorsOpt: true, stream: false, levelOption: 1, outputLevel: 1 },
+    { colorsOpt: false, stream: false, levelOption: 1, outputLevel: 0 },
+    { colorsOpt: undefined, stream: false, levelOption: 2, outputLevel: 0 },
+    { colorsOpt: true, stream: false, levelOption: 2, outputLevel: 2 },
+    { colorsOpt: false, stream: false, levelOption: 2, outputLevel: 0 },
+    { colorsOpt: undefined, stream: false, levelOption: 3, outputLevel: 0 },
+    { colorsOpt: true, stream: false, levelOption: 3, outputLevel: 3 },
+    { colorsOpt: false, stream: false, levelOption: 3, outputLevel: 0 },
+
+    { colorsOpt: undefined, stream: true, levelOption: 1, outputLevel: 1 },
+    { colorsOpt: true, stream: true, levelOption: 1, outputLevel: 1 },
+    { colorsOpt: false, stream: true, levelOption: 1, outputLevel: 0 },
+    { colorsOpt: undefined, stream: true, levelOption: 2, outputLevel: 2 },
+    { colorsOpt: true, stream: true, levelOption: 2, outputLevel: 2 },
+    { colorsOpt: false, stream: true, levelOption: 2, outputLevel: 0 },
+    { colorsOpt: undefined, stream: true, levelOption: 3, outputLevel: 3 },
+    { colorsOpt: true, stream: true, levelOption: 3, outputLevel: 3 },
+    { colorsOpt: false, stream: true, levelOption: 3, outputLevel: 0 },
+
+    {
+      colorsOpt: undefined,
+      stream: false,
+      levelOption: 1,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: true,
+      stream: false,
+      levelOption: 1,
+      terminalLevel: 0,
+      outputLevel: 1,
+    },
+    {
+      colorsOpt: false,
+      stream: false,
+      levelOption: 1,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: undefined,
+      stream: false,
+      levelOption: 2,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: true,
+      stream: false,
+      levelOption: 2,
+      terminalLevel: 0,
+      outputLevel: 2,
+    },
+    {
+      colorsOpt: false,
+      stream: false,
+      levelOption: 2,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: undefined,
+      stream: false,
+      levelOption: 3,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: true,
+      stream: false,
+      levelOption: 3,
+      terminalLevel: 0,
+      outputLevel: 3,
+    },
+    {
+      colorsOpt: false,
+      stream: false,
+      levelOption: 3,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+
+    {
+      colorsOpt: undefined,
+      stream: true,
+      levelOption: 1,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: true,
+      stream: true,
+      levelOption: 1,
+      terminalLevel: 0,
+      outputLevel: 1,
+    },
+    {
+      colorsOpt: false,
+      stream: true,
+      levelOption: 1,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: undefined,
+      stream: true,
+      levelOption: 2,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: true,
+      stream: true,
+      levelOption: 2,
+      terminalLevel: 0,
+      outputLevel: 2,
+    },
+    {
+      colorsOpt: false,
+      stream: true,
+      levelOption: 2,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: undefined,
+      stream: true,
+      levelOption: 3,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: true,
+      stream: true,
+      levelOption: 3,
+      terminalLevel: 0,
+      outputLevel: 3,
+    },
+    {
+      colorsOpt: false,
+      stream: true,
+      levelOption: 3,
+      terminalLevel: 0,
+      outputLevel: 0,
+    },
+
+    {
+      colorsOpt: undefined,
+      stream: false,
+      levelOption: 1,
+      terminalLevel: 3,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: true,
+      stream: false,
+      levelOption: 1,
+      terminalLevel: 3,
+      outputLevel: 1,
+    },
+    {
+      colorsOpt: false,
+      stream: false,
+      levelOption: 1,
+      terminalLevel: 3,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: undefined,
+      stream: false,
+      levelOption: 2,
+      terminalLevel: 3,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: true,
+      stream: false,
+      levelOption: 2,
+      terminalLevel: 3,
+      outputLevel: 2,
+    },
+    {
+      colorsOpt: false,
+      stream: false,
+      levelOption: 2,
+      terminalLevel: 3,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: undefined,
+      stream: false,
+      levelOption: 3,
+      terminalLevel: 3,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: true,
+      stream: false,
+      levelOption: 3,
+      terminalLevel: 3,
+      outputLevel: 3,
+    },
+    {
+      colorsOpt: false,
+      stream: false,
+      levelOption: 3,
+      terminalLevel: 3,
+      outputLevel: 0,
+    },
+
+    {
+      colorsOpt: undefined,
+      stream: true,
+      levelOption: 1,
+      terminalLevel: 3,
+      outputLevel: 1,
+    },
+    {
+      colorsOpt: true,
+      stream: true,
+      levelOption: 1,
+      terminalLevel: 3,
+      outputLevel: 1,
+    },
+    {
+      colorsOpt: false,
+      stream: true,
+      levelOption: 1,
+      terminalLevel: 3,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: undefined,
+      stream: true,
+      levelOption: 2,
+      terminalLevel: 3,
+      outputLevel: 2,
+    },
+    {
+      colorsOpt: true,
+      stream: true,
+      levelOption: 2,
+      terminalLevel: 3,
+      outputLevel: 2,
+    },
+    {
+      colorsOpt: false,
+      stream: true,
+      levelOption: 2,
+      terminalLevel: 3,
+      outputLevel: 0,
+    },
+    {
+      colorsOpt: undefined,
+      stream: true,
+      levelOption: 3,
+      terminalLevel: 3,
+      outputLevel: 3,
+    },
+    {
+      colorsOpt: true,
+      stream: true,
+      levelOption: 3,
+      terminalLevel: 3,
+      outputLevel: 3,
+    },
+    {
+      colorsOpt: false,
+      stream: true,
+      levelOption: 3,
+      terminalLevel: 3,
+      outputLevel: 0,
+    },
   ],
   (
     { title },
@@ -60,7 +332,7 @@ each(
       colorsOpt,
       terminalLevel = '',
       levelOption,
-      stream = getTtyStream(),
+      stream: streamOption,
       outputLevel,
     },
   ) => {
@@ -72,7 +344,7 @@ each(
         const chalk = colorsOption({
           colors: colorsOpt,
           level: levelOption,
-          stream,
+          stream: getStream(streamOption),
         })
 
         // eslint-disable-next-line max-depth

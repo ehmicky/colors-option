@@ -50,17 +50,16 @@ _Return value_: [`Chalk` instance](https://github.com/chalk/chalk#api)
 
 #### colors
 
-_Type_: `boolean`\
-_Default_: `undefined`
+_Type_: `boolean`
 
 Whether colors should be displayed or not.
 
-Since it is automatically detected by the [`stream`](#stream) option, this is
-only meant to override the default behavior.
+The default value depends on whether the [`stream`](#stream) supports colors.
+Therefore, this is only meant to override that.
 
 Instead of using
-[`chalk/supports-color`](https://github.com/chalk/supports-color), this relies
-on Node.js built-in colors detection
+[`chalk/supports-color`](https://github.com/chalk/supports-color), the default
+value relies on Node.js built-in colors detection
 [`getColorDepth()`](https://nodejs.org/api/tty.html#tty_writestream_getcolordepth_env)
 which:
 
@@ -73,8 +72,7 @@ which:
 
 #### level
 
-_Type_: `1 | 2 | 3`\
-_Default_: `undefined`
+_Type_: `1 | 2 | 3`
 
 [How many colors](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors) to
 display. The value can be:
@@ -83,8 +81,10 @@ display. The value can be:
 - `2`: 256 (8 bits)
 - `3`: 16 millions (24 bits)
 
-Since it is automatically detected by the [`stream`](#stream) option, this is
-only meant to override the default behavior.
+The default value depends on
+[how many colors](https://nodejs.org/api/tty.html#writestreamgetcolordepthenv)
+the [`stream`](#stream) supports. Therefore, this is only meant to override
+that.
 
 #### stream
 

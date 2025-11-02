@@ -11,14 +11,19 @@ import { getOpts } from './options.js'
 //  - Has a simpler priority order between CLI flags, options and environment
 //    variables
 //  - Is built-in Node.js behavior
+// Use a `colors: boolean` + `level: 1|2|3` instead of a single `level: 0|1|2|3`
+// since enabling/disable colors is conceptually different from changing the
+// color depth.
 const colorsOption = (opts) => {
   const {
-    colors,
     stream,
-    level: levelOption = getDefaultLevel(stream),
+    colors = stream.isTTY && stream.getColorDepth() !== 1,
+    level: levelOption = stream.isTTY
+      ? DEPTH_TO_LEVEL[stream.getColorDepth()]
+      : 1,
     chalkOpts,
   } = getOpts(opts)
-  const level = applyColorsOption(colors, levelOption)
+  const level = colors ? levelOption : 0
   return new Chalk({ ...chalkOpts, level })
 }
 
@@ -28,16 +33,5 @@ export default colorsOption
 // to determine the color depth:
 // https://github.com/nodejs/node/blob/aac7925801edfc8dd1de051a29aac85332e7d200/lib/internal/tty.js#L123
 // We still need the `stream` to disable colors by default when it is not a TTY.
-const getDefaultLevel = (stream) =>
-  stream.isTTY ? DEPTH_TO_LEVEL[stream.getColorDepth()] : 0
-
-// Maps color depth to chalk levels
-const DEPTH_TO_LEVEL = { 1: 0, 4: 1, 8: 2, 24: 3 }
-
-const applyColorsOption = (colors, level) => {
-  if (colors === false) {
-    return 0
-  }
-
-  return colors === undefined ? level : Math.max(level, 1)
-}
+// Maps color depth to chalk levels.
+const DEPTH_TO_LEVEL = { 1: 1, 4: 1, 8: 2, 24: 3 }

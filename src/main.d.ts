@@ -7,10 +7,8 @@ export type Options = Partial<
     /**
      * Whether colors should be displayed or not.
      *
-     * Since it is automatically detected by the `stream` option, this is only
-     * meant to override the default behavior.
-     *
-     * @default undefined
+     * The default value depends on whether the `stream` supports colors.
+     * Therefore, this is only meant to override that.
      */
     colors: boolean | undefined
 
@@ -22,10 +20,9 @@ export type Options = Partial<
      * - `2`: 256 (8 bits)
      * - `3`: 16 millions (24 bits)
      *
-     * Since it is automatically detected by the `stream` option, this is only
-     * meant to override the default behavior.
-     *
-     * @default undefined
+     * The default value depends on
+     * [how many colors](https://nodejs.org/api/tty.html#writestreamgetcolordepthenv)
+     * the `stream` supports. Therefore, this is only meant to override that.
      */
     level: 1 | 2 | 3 | undefined
 
